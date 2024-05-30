@@ -1,7 +1,9 @@
-.error {
-    border: red 1px solid;
+.container {
+    display: flex;
+    align-items: center;
 }
-
-.errorMessage {
-    color: red;
+.emptyTask{
+    color: crimson;
+    font-weight: bold;
+    font-size: larger;
 }
