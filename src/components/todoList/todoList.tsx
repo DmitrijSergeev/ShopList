@@ -1,4 +1,4 @@
-import React, {useRef, KeyboardEvent, useState, ChangeEvent} from 'react';
+import React, {ChangeEvent} from 'react';
 import {FilterType} from "../../App";
 import s from './todoList.module.css'
 import {AddItemForm} from "../../components/addItemForm/addItemForm";
@@ -19,11 +19,12 @@ export type TodoListProps = {
     title: string
     filter: FilterType
     removeTodoList: (id: string) => void
+    updateTask: (id: string, taskId: string, title: string)=>void
 }
 export const TodoList = (props: TodoListProps) => {
     const {
         tasks, removeTasks, changeFilter, addTask,
-        changeTaskStatus, id, removeTodoList, title
+        changeTaskStatus, id, removeTodoList, title, updateTask
     } = props;
 
     // const [error, setError] = useState<string | null>(null)
@@ -67,6 +68,9 @@ export const TodoList = (props: TodoListProps) => {
                         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
                             changeTaskStatus(id, t.taskId, e.currentTarget.checked)
                         }
+                        const onChangeTitleHandler = (title: string) => {
+                            updateTask(id, t.taskId, title)
+                        }
                         return (
                             <li key={t.taskId}>
                                 <button onClick={onClickHandler}>x</button>
@@ -74,7 +78,7 @@ export const TodoList = (props: TodoListProps) => {
                                        checked={t.isDone}
                                        onChange={onChangeHandler}
                                 />
-                                <EditAbleSpan value={t.title}/>
+                                <EditAbleSpan value={t.title} onChange={onChangeTitleHandler}/>
                             </li>
                         )
                     })}
