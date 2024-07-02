@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import {TaskProps, TodoList} from "./components/todoList/todoList";
 import {v1} from "uuid";
 import {AddItemForm} from "./components/addItemForm/addItemForm";
+import {todolistApi} from "./api/todolist-api";
 
 export type FilterType = 'all' | 'active' | 'completed'
 export type TodoListType = {
@@ -17,6 +18,12 @@ let todoId1 = v1();
 let todoId2 = v1();
 
 function App() {
+
+    useEffect(() => {
+        todolistApi.getTodoLists().then( (res)=>{
+            console.log(res.data)
+        } )
+    }, []);
 
     let [todoLists, setTodoLists] = useState<TodoListType[]>([
         {id: todoId1, title: 'What to learn?', filter: 'all'},
