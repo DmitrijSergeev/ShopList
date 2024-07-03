@@ -20,7 +20,7 @@ let todoId2 = v1();
 function App() {
 
     useEffect(() => {
-        todolistApi.getTodoLists().then( (res)=>{
+        todolistApi.createTodoLists('hhhh').then( (res)=>{
             console.log(res.data)
         } )
     }, []);
