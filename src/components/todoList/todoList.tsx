@@ -3,15 +3,16 @@ import {FilterType} from "../../App";
 import s from './todoList.module.css'
 import {AddItemForm} from "../../components/addItemForm/addItemForm";
 import {EditAbleSpan} from "../../components/editAbleSpan/editAbleSpan";
+import {TaskStatuses, TaskType} from "../../api/todolist-api";
 
-export type TaskProps = {
-    taskId: string
-    title: string
-    isDone: boolean
-}
+// export type TaskProps = {
+//     taskId: string
+//     title: string
+//     isDone: boolean
+// }
 export type TodoListProps = {
     id: string
-    tasks: TaskProps[]
+    tasks: TaskType[]
     removeTasks: (id: string, taskId: string) => void
     changeFilter: (todoId: string, filter: FilterType) => void
     addTask: (id: string, title: string) => void
@@ -63,19 +64,19 @@ export const TodoList = (props: TodoListProps) => {
                 <ul>
                     {tasks.map((t) => {
                         const onClickHandler = () => {
-                            removeTasks(id, t.taskId)
+                            removeTasks(id, t.id)
                         }
                         const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                            changeTaskStatus(id, t.taskId, e.currentTarget.checked)
+                            changeTaskStatus(id, t.id, e.currentTarget.checked)
                         }
                         const onChangeTitleHandler = (title: string) => {
-                            updateTask(id, t.taskId, title)
+                            updateTask(id, t.id, title)
                         }
                         return (
-                            <li key={t.taskId}>
+                            <li key={t.id}>
                                 <button onClick={onClickHandler}>x</button>
                                 <input type="checkbox"
-                                       checked={t.isDone}
+                                       checked={t.status === TaskStatuses.Completed}
                                        onChange={onChangeHandler}
                                 />
                                 <EditAbleSpan value={t.title} onChange={onChangeTitleHandler}/>

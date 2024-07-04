@@ -1,15 +1,14 @@
-import {TodoListType} from "../App";
 import {v1} from "uuid";
-import {todoListsReducer} from "../model/todolists-reducer";
+import {TodolistDomainType, todoListsReducer} from "../model/todolists-reducer";
 
 test('correct todolist should be removed', () => {
     let todolistId1 = v1()
     let todolistId2 = v1()
 
     // 1. Стартовый state
-    const startState: TodoListType[] = [
-        {id: todolistId1, title: 'What to learn', filter: 'all'},
-        {id: todolistId2, title: 'What to buy', filter: 'all'},
+    const startState: TodolistDomainType[] = [
+        {id: todolistId1, title: "What to learn", filter: "all", addedDate: "", order: 0},
+        {id: todolistId2, title: "What to buy", filter: "all", addedDate: "", order: 0},
     ]
 
     const action = {
@@ -28,9 +27,9 @@ test('correct todolist should be added', () => {
     let todolistId2 = v1()
 
     // 1. Стартовый state
-    const startState: TodoListType[] = [
-        {id: todolistId1, title: 'What to learn', filter: 'all'},
-        {id: todolistId2, title: 'What to buy', filter: 'all'},
+    const startState: TodolistDomainType[] = [
+        {id: todolistId1, title: "What to learn", filter: "all", addedDate: "", order: 0},
+        {id: todolistId2, title: "What to buy", filter: "all", addedDate: "", order: 0},
     ]
 
     const action = {
